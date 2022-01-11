@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-#import preprocess
+import preprocess
 import os
 import tensorflow as tf
 from flask import Flask, request, render_template
