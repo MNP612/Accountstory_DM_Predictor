@@ -37,24 +37,23 @@ def process_data(data):
 
     data.drop(useless_features, axis=1, inplace=True)
 
-    # engineer 'Education'
-    URL = 'https://namecensus.com/top-first-names/top-first-names-since-1950.html'
-    page = requests.get(URL)
-    soup = BeautifulSoup(page.content, "html.parser")
-
-    us_name_list = {}
-    html_table = soup.find_all("td")[5:]
-    for idx in range(len(html_table)):
-        if (idx) % 5 == 1:
-            us_name_list[html_table[idx].text.lower()] = html_table[idx+1].text
-
     # engineer 'Name'
-    data['us_name'] = 0
-    for idx, name in enumerate(data['first_name']):
-        if name in us_name_list.keys():
-            data.at[idx, 'us_name'] = 1
+    # URL = 'https://namecensus.com/top-first-names/top-first-names-since-1950.html'
+    # page = requests.get(URL)
+    # soup = BeautifulSoup(page.content, "html.parser")
+
+    # us_name_list = {}
+    # html_table = soup.find_all("td")[5:]
+    # for idx in range(len(html_table)):
+    #     if (idx) % 5 == 1:
+    #         us_name_list[html_table[idx].text.lower()] = html_table[idx+1].text
+
+    # data['us_name'] = 0
+    # for idx, name in enumerate(data['first_name']):
+    #     if name in us_name_list.keys():
+    #         data.at[idx, 'us_name'] = 1
             
-    data.drop('first_name', axis=1, inplace=True) # drop 'name' column
+    # data.drop('first_name', axis=1, inplace=True) # drop 'name' column
 
     # gender string to integer
     data.loc[(data['gender'] == 'male'), 'gender'] = 1
