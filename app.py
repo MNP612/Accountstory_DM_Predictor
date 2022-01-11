@@ -31,7 +31,7 @@ def home():
         res = pred(pred_data)
         res = round(res[0][0], 2)
         return render_template("index.html",
-                           value = res)
+                           value = str(res)+ ' ' + employee_index)
     return render_template("index.html")
     
 if __name__ == "__main__":

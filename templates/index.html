@@ -1,5 +1,37 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+  <style>
+    * {
+        font-family: "Helvetica", "sans-serif";
+    }
+    div {
+        text-align: center;
+        margin-top: 50px;
+    }
+    h1 {
+      text-align: center;
+        color: blue;
+        font-size: 40pt;
+    }
+    form {
+      text-align: center; 
+      font-size: 20pt;
+      width: 35;
+    }
+    h3 {
+      text-align: center; 
+      font-size: 20pt;
+    }
+    #name_employee {
+      width: 25em;  
+    height: 2em;
+    }
+    #submit {
+    width: 10em;  
+    height: 40em;
+    font-size: 10pt;
+    }
+</style>
   <head>
     <meta charset="utf-8">
     <title>Accountstory Web App</title>
@@ -7,11 +39,11 @@
   <body>
     <h1> Accountstory ML Playground </h1>
     <form method='post'>
-      <label for="name_employee">Input employee:</label><br>
+      <label for="name_employee">Employee name (1st & 2nd):</label><br>
       <input type="text" id="name_employee" name="name_employee" value=""><br>
-      <input type="submit" value="Submit">
+      <input type="submit" id='submit' value="Submit">
     </form>
-    <h3>{{ value }}</h3> 
+    <h3>{{ value }} confidence</h3> 
     
     
   </body>
