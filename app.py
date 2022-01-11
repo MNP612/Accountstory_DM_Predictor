@@ -7,7 +7,7 @@ from flask import Flask, request, render_template
 
 my_path = os.path.abspath(os.path.dirname(__file__))
 
-#data = pd.read_json(my_path + '/combined_dataset_20210930.json')#.loc[[0]].reset_index(drop=True)
+data = pd.read_json(my_path + '/combined_dataset_20210930.json')#.loc[[0]].reset_index(drop=True)
 #data = preprocess.process_data(data)
 
 model = tf.keras.models.load_model(my_path + '/model')
