@@ -1,8 +1,8 @@
-#import pandas as pd
-#import numpy as np
-#import preprocess
-#import os
-#import tensorflow as tf
+import pandas as pd
+import numpy as np
+import preprocess
+import os
+import tensorflow as tf
 #from tensorflow import keras
 
 from flask import Flask, request, render_template
@@ -40,8 +40,6 @@ def home():
         return render_template("index.html",
                            value = first_name)
     return render_template("index.html")
-
-#port = int(os.environ.get('PORT', 33507))
     
 if __name__ == "__main__":
     app.run(debug=True)
