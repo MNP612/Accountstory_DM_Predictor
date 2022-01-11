@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import datetime
 import re
+import os
+
+my_path = os.path.abspath(os.path.dirname(__file__))
 
 def process_data(data):
 
@@ -60,7 +63,7 @@ def process_data(data):
     data.loc[(data['gender'] == None), 'gender'] = 0
 
     # engineer 'Uni'
-    uni_rank = pd.read_csv('uni_rank.csv', sep='\t')[['World Rank', 'Institution']].to_dict()['Institution']
+    uni_rank = pd.read_csv(my_path + '/uni_rank.csv', sep='\t')[['World Rank', 'Institution']].to_dict()['Institution']
 
     def string_replace(origignal_string):
         origignal_string = origignal_string.lower()

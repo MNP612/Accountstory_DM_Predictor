@@ -3,28 +3,17 @@ import numpy as np
 import preprocess
 import os
 import tensorflow as tf
-#from tensorflow import keras
-
 from flask import Flask, request, render_template
 
-#data = pd.read_json('combined_dataset_20210930.json').loc[[100]].reset_index(drop=True)
+my_path = os.path.abspath(os.path.dirname(__file__))
 
-#data = preprocess.process_data(data)
-#data = np.zeros((1,314))
+data = pd.read_json(my_path + '/combined_dataset_20210930.json')#.loc[[0]].reset_index(drop=True)
+data = preprocess.process_data(data)
 
-# class UnetInferrer:
-#     def __init__(self):
-#         self.data = data
-#         #print('YOOOOOO', self.data)
-#         self.saved_path = ''
-#         self.model = tf.keras.models.load_model('model.h5')
+model = tf.keras.models.load_model(my_path + '/model')
 
-#         self.prediction = self.model.predict(self.data)
-
-#     def pred(self):
-#         return self.prediction
-
-# res = UnetInferrer().pred()
+def pred(pred_data):
+    return model.predict(pred_data)
 
 # build the Flask app
 app = Flask(__name__)
@@ -33,12 +22,15 @@ app = Flask(__name__)
 def home():
     if request.method == "GET":
        return render_template("index.html",
-                           value = '')
+                           value = 1)
        
     if request.method == 'POST':
-        first_name = request.form.get("name_employee")
+        employee_index = request.form.get("name_employee")
+        pred_data = np.array(data)[int(employee_index)][:314].astype(float).reshape(1,-1)
+        res = pred(pred_data)
+        res = round(res[0][0], 2)
         return render_template("index.html",
-                           value = first_name)
+                           value = res)
     return render_template("index.html")
     
 if __name__ == "__main__":
