@@ -31,14 +31,15 @@ app = Flask(__name__)
 
 @app.route("/", methods =["GET", "POST"])
 def home():
-    if request.method == "GET":
-       return render_template("index.html",
-                           value = '')
+    # if request.method == "GET":
+    #    return render_template("index.html",
+    #                        value = '')
        
-    if request.method == 'POST':
-        first_name = request.form.get("name_employee")
-        return render_template("index.html",
-                           value = first_name)
+    # if request.method == 'POST':
+    #     first_name = request.form.get("name_employee")
+    #     return render_template("index.html",
+    #                        value = first_name)
+    return render_template("index.html")
 
 port = int(os.environ.get('PORT', 33507))
     
