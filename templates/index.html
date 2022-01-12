@@ -11,14 +11,14 @@
     h1 {
       text-align: center;
         color: blue;
-        font-size: 40pt;
+        font-size: 30pt;
     }
     form {
       text-align: center; 
       font-size: 20pt;
       width: 35;
     }
-    h3 {
+    #val {
       text-align: center; 
       font-size: 20pt;
     }
@@ -26,25 +26,38 @@
       width: 25em;  
     height: 2em;
     }
-    #submit {
+    input#submit {
     width: 10em;  
-    height: 40em;
+    height: 5em;
     font-size: 10pt;
     }
 </style>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" meta charset="utf-8">
+    
     <title>Accountstory Web App</title>
   </head>
   <body>
     <h1> Accountstory ML Playground </h1>
     <form method='post'>
-      <label for="name_employee">Employee name (1st & 2nd):</label><br>
+      <label for="name_employee">Employee name (full):</label><br>
       <input type="text" id="name_employee" name="name_employee" value=""><br>
       <input type="submit" id='submit' value="Submit">
     </form>
-    <h3>{{ value }} confidence</h3> 
+    
+    <p id='val'></p>
+    <script>
+      var val = '{{value}}'
+      document.getElementById('val').innerHTML = val + ' %'
+      if (val > 50)
+      {
+      document.getElementById('val').style.color = 'green';
+      }
+      else
+      {
+        document.getElementById('val').style.color = 'red';
+      }
+      </script>
     
     
   </body>

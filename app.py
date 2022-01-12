@@ -29,9 +29,9 @@ def home():
         #pred_data = np.array(data)[int(employee_index)][:314].astype(float).reshape(1,-1)
         pred_data = np.zeros((1,314))
         res = pred(pred_data)
-        res = round(res[0][0], 2)
+        res = round(res[0][0] * 100, 1)
         return render_template("index.html",
-                           value = str(res)+ ' ' + employee_index)
+                           value = res)
     return render_template("index.html")
     
 if __name__ == "__main__":
