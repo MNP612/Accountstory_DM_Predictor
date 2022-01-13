@@ -1,5 +1,3 @@
-#import pandas as pd
-
 from src import preprocess
 import src.pdlload as pdlload
 import os
