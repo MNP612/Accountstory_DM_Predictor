@@ -1,0 +1,316 @@
+feature, score
+gender,0.020761750089108393
+us_name,0.011977416661097749
+uni_rank,0.07191230002955099
+degree_score,0.025148733223046782
+edu_marketing,0.0
+edu_communication,0.008267957959203641
+edu_english,0.0
+edu_political science,0.0
+edu_business management,0.0
+edu_psychology,0.0
+edu_liberal studies,0.0
+edu_communications,0.0
+edu_german,0.0
+edu_electrical engineering,0.0
+edu_electrical engineering and computer science,0.0
+edu_computer science,0.003210868492873893
+edu_software engineering,0.0
+edu_management,0.0
+edu_education,0.0
+edu_organizational leadership,0.0
+edu_business administration,0.0
+edu_business administration and management,0.0
+edu_business,0.0
+edu_media studies,0.0
+edu_entrepreneurship,0.0
+edu_computer engineering,0.01016996279869447
+edu_broadcasting,0.0
+edu_human resources,0.0
+edu_biochemistry,0.0
+edu_accounting,0.0
+edu_broadcast journalism,0.0
+edu_mathematics,0.0
+edu_liberal arts,0.0
+edu_history,0.0
+edu_art,0.0
+edu_data science,0.0
+edu_applied physics,0.0
+edu_physics,0.0
+edu_information systems,0.0
+edu_design,0.0
+edu_leadership,0.0
+edu_international relations,0.0
+edu_arabic,0.0
+edu_entrepreneurial studies,0.0
+edu_computer and information systems,0.0
+edu_drawing,0.0
+edu_electronics,0.0
+edu_nanotechnology,0.0
+edu_engineering,0.0
+edu_economics,0.0
+edu_business marketing,0.0
+edu_sport management,0.0
+edu_architecture,0.0
+edu_accountancy,0.0
+edu_french language,0.0
+edu_literature,0.0
+edu_french language and literature,0.0
+edu_english language and literature,0.0
+edu_english language,0.0
+edu_graphic design,0.0
+edu_art history,0.0
+edu_anthropology,0.0
+edu_politics,0.0
+edu_russian,0.0
+edu_international studies,0.0
+edu_real estate,0.0
+edu_finance,0.0
+edu_international affairs,0.0
+edu_sociology,0.0
+edu_teaching,0.0
+edu_business economics,0.0
+edu_medicine,0.0
+edu_biology,0.0
+edu_operations management,0.0
+edu_mechanical engineering,0.0
+edu_religious studies,0.0
+edu_computer systems,0.0
+edu_ministry,0.0
+edu_philosophy,0.0
+edu_civil engineering,0.0
+edu_rhetoric,0.0
+edu_logistics,0.0
+edu_electronics engineering,0.0
+edu_telecommunications,0.0
+edu_network administration,0.0
+edu_criminal justice,0.0
+edu_law enforcement,0.0
+edu_statistics,0.0
+edu_materials science,0.0
+edu_international business,0.0
+edu_latin american studies,0.0
+edu_social science,0.0
+edu_computer systems engineering,0.0
+edu_general business,0.0
+edu_product marketing,0.0
+edu_spanish,0.0
+edu_journalism,0.0
+edu_health science,0.0
+edu_public health,0.0
+edu_theological studies,0.0
+edu_theology,0.0
+edu_human resources management,0.0
+edu_social work,0.0
+edu_supply chain management,0.0
+edu_chemical engineering,0.0
+edu_industrial engineering,0.0
+edu_coaching,0.0
+edu_fine arts,0.0
+edu_applied mathematics,0.0
+edu_comparative literature,0.0
+edu_aviation,0.0
+edu_public relations,0.0
+edu_commerce,0.0
+edu_theatre,0.0
+edu_project management,0.0
+edu_computer science and engineering,0.0
+edu_piano,0.0
+edu_piano performance,0.0
+edu_french,0.0
+edu_spanish language,0.0
+edu_general studies,0.0
+edu_corporate finance,0.0
+edu_investment banking,0.0
+edu_chinese language,0.0
+edu_archeology,0.0
+edu_classical literature,0.0
+edu_european history,0.0
+edu_global studies,0.0
+edu_public policy,0.0
+edu_communication studies,0.0
+edu_applied economics,0.0
+edu_italian studies,0.0
+edu_financial management,0.0
+edu_human relations,0.0
+edu_information science,0.0
+edu_music,0.006474499708287076
+edu_public administration,0.0
+edu_government,0.0
+edu_management science,0.0
+edu_film,0.0
+edu_corrections,0.0
+edu_labor relations,0.0
+edu_financial economics,0.0
+edu_neuroscience,0.0
+edu_premed,0.0
+edu_geochemistry,0.0
+edu_geology,0.0
+edu_legal studies,0.0
+edu_environmental science,0.0
+edu_industrial relations,0.0
+edu_law,0.0
+edu_financial engineering,0.0
+edu_finance and marketing,0.0
+edu_counseling,0.0
+edu_fashion,0.0
+edu_aerospace engineering,0.0
+edu_writing,0.0
+edu_sustainability,0.0
+edu_linguistics,0.0
+edu_general education,0.0
+edu_physical therapy,0.0
+edu_elementary education,0.0
+edu_tourism,0.0
+edu_business studies,0.0
+edu_photography,0.0
+edu_human resource management,0.0
+edu_biomedical science,0.0
+edu_kinesiology,0.0
+edu_forensics,0.0
+edu_informatics,0.0
+edu_animation,0.0
+edu_physiology,0.0
+edu_multimedia,0.0
+edu_political science and government,0.0
+edu_banking,0.0
+edu_health education,0.0
+edu_english literature,0.0
+edu_advertising,0.0
+edu_creative writing,0.0
+edu_clinical psychology,0.0
+edu_latin,0.0
+edu_chinese,0.0
+edu_environmental studies,0.0
+edu_cognitive science,0.0
+edu_composition,0.0
+edu_computer programming,0.0
+edu_actuarial science,0.0
+edu_fundraising,0.0
+edu_global health,0.0
+edu_theater arts,0.0
+edu_urban studies,0.0
+edu_social sciences,0.0
+edu_studio arts,0.0
+edu_exercise science,0.0
+edu_european studies,0.0
+edu_web development,0.0
+edu_mechatronics engineering,0.0
+edu_industrial design,0.0
+edu_television,0.0
+edu_italian,0.0
+edu_japanese language studies,0.0
+edu_applied psychology,0.0
+edu_human development,0.0
+edu_computer information systems,0.0
+edu_chemistry,0.0
+edu_computer science and mathematics,0.0
+edu_geography,0.0
+edu_illustration,0.0
+edu_music education,0.0
+edu_visual communications,0.0
+edu_studio art,0.0
+edu_japanese,0.0
+edu_japanese language,0.0
+edu_japanese language and literature,0.0
+edu_industrial and organizational psychology,0.0
+edu_information systems management,0.0
+edu_spanish language and literature,0.0
+edu_applied science,0.0
+edu_conflict resolution,0.0
+edu_sustainability management,0.0
+edu_speech communications,0.0
+edu_cybersecurity,0.0
+edu_organizational communications,0.0
+edu_biophysics,0.0
+edu_fine art,0.0
+edu_painting,0.0
+edu_human resource development,0.0
+edu_criminology,0.0
+edu_sustainability studies,0.0
+edu_computer applications,0.0
+edu_pre law,0.0
+edu_biomedical engineering,0.0
+edu_french literature,0.0
+edu_industrial engineering and operations research,0.0
+edu_environmental engineering,0.0
+edu_computer and information science,0.0
+edu_computer,0.0
+edu_genetics,0.0
+edu_international law,0.0
+edu_science information,0.0
+edu_bioinformatics,0.0
+edu_turkish,0.0
+edu_publishing,0.0
+edu_geophysics,0.0
+edu_humanities,0.0
+edu_international economics,0.0
+edu_interdisciplinary studies,0.0
+edu_african culture,0.0
+edu_public affairs,0.0
+edu_american history,0.0
+edu_italian culture,0.0
+edu_energy,0.0
+edu_ethics,0.0
+edu_molecular biophysics,0.0
+edu_interactive media,0.0
+edu_german language and culture,0.0
+edu_german language,0.0
+edu_agriculture,0.0
+edu_chinese language and literature,0.0
+edu_business law,0.0
+edu_government and politics,0.0
+month_of_service,0.06943520754736054
+level_owner,0.0
+level_cxo,0.0
+level_director,0.0028311131035423836
+level_manager,0.012038323812509777
+level_senior,0.02441206012307444
+level_vp,0.0
+level_partner,0.006949021582520887
+skills_count,0.09065705473709951
+company_count,0.11221650170821318
+company_global,0.008632876082501703
+role_customer_service,0.0
+role_design,0.0058984134332223095
+role_education,0.0
+role_engineering,0.0005080401539311547
+role_finance,0.0
+role_health,0.0
+role_human_resources,0.0
+role_legal,0.0
+role_marketing,0.005402374714737341
+role_media,0.0
+role_operations,0.0034621505221643814
+role_public_relations,0.0
+role_sales,0.005143599685993472
+sub_role_accounting,0.0
+sub_role_accounts,0.008725813454705205
+sub_role_brand_marketing,0.0
+sub_role_business_development,0.0
+sub_role_compensation,0.0
+sub_role_content_marketing,0.0
+sub_role_customer_success,0.0
+sub_role_data,0.0
+sub_role_devops,0.0
+sub_role_editorial,0.0
+sub_role_employee_development,0.0
+sub_role_events,0.0
+sub_role_information_technology,0.0
+sub_role_investment,0.0
+sub_role_lawyer,0.0
+sub_role_logistics,0.0
+sub_role_network,0.0
+sub_role_pipeline,0.0
+sub_role_product,0.0054104819994623
+sub_role_product_design,0.0
+sub_role_product_marketing,0.0
+sub_role_project_management,0.0
+sub_role_recruiting,0.0
+sub_role_researcher,0.0
+sub_role_security,0.0
+sub_role_software,0.018999201115649653
+sub_role_support,0.0
+sub_role_systems,0.0
+sub_role_video,0.0
+sub_role_wellness,0.0

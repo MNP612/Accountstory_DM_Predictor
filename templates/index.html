@@ -11,30 +11,34 @@
     h1 {
       text-align: center;
         color: blue;
-        font-size: 30pt;
+        font-size: 25pt;
     }
     
     form {
       text-align: center; 
-      font-size: 20pt;
+      font-size: 15pt;
       width: 35;
     }
-    #val {
+    #company_and_name {
+      text-align: center; 
+      font-size: 15pt;
+    }
+    #pred_val {
       text-align: center; 
       font-size: 20pt;
     }
-    #name_employee {
+    #pred_propability {
+      text-align: center; 
+      font-size: 15pt;
+    }
+    #name_employee_field {
       width: 25em;  
     height: 2em;
-    padding-left: 10px; 
-    padding-right: 20px; 
-    padding-top: 30px; 
-    padding bottom: 10px; 
     }
     input#submit {
     width: 7em;  
     height: 1.5em;
-    font-size: 20pt;
+    font-size: 15pt;
     }
    
 
@@ -45,24 +49,39 @@
     <title>Accountstory Web App</title>
   </head>
   <body>
-    <h1> Accountstory ML Playground </h1>
-    <form method='post'>
-      <label for="name_employee">Employee name (full): </label><br>
-      <input type="text" id="name_employee" name="name_employee" value=""><br>
+    <h1> Accountstory DM Predictor </h1>
+    <form method='post' name='input_form'>
+      <label for="name_employee">&ltfirst_name last_name company&gt </label><br>
+      <input type="text" id="name_employee_field" name="name_employee_field" value=""><br>
       <input type="submit" id='submit' value="Submit">
     </form>
     
-    <p id='val'></p>
+    <p id='company_and_name'>{{company_and_name}}</p>
+    <p id='pred_val'></p>
+    <p id='pred_propability'></p>
+    
+
     <script>
-      var val = '{{value}}'
-      document.getElementById('val').innerHTML = val + ' %'
-      if (val > 50)
-      {
-      document.getElementById('val').style.color = 'green';
+
+      var pred_val = '{{value}}'
+      
+      if (pred_val == -1)
+      {    
+      document.getElementById('pred_val').innerHTML =  'No Result'
+      document.getElementById('pred_val').style.color = 'gray';
+      document.getElementById('pred_propability').innerHTML =  'check spelling or try another person'
+      }
+      else if (pred_val > 50)
+      {    
+      document.getElementById('pred_val').innerHTML =   'Decision Maker'
+      document.getElementById('pred_val').style.color = 'green';
+      document.getElementById('pred_propability').innerHTML =  pred_val + ' % probability of being a DM'
       }
       else
       {
-        document.getElementById('val').style.color = 'red';
+        document.getElementById('pred_val').innerHTML = 'No Decision Maker'
+        document.getElementById('pred_val').style.color = 'red';
+        document.getElementById('pred_propability').innerHTML =  pred_val + ' % probability of being a DM'
       }
       </script>
     

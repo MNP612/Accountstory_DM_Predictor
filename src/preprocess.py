@@ -1,16 +1,19 @@
-import numpy as np
-#import requests
-#from bs4 import BeautifulSoup
 import pandas as pd
+import numpy as np
 import datetime
 import re
 import os
+import warnings
+
+warnings.simplefilter(action='ignore')
 
 my_path = os.path.abspath(os.path.dirname(__file__))
+model_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'model'))
 
 def process_data(data):
-
-    useless_features = [ 'full_name', 'middle_initial', 'middle_name', 'last_name'
+    data = pd.Series(data)
+    
+    useless_features = ['id', 'full_name', 'middle_initial', 'middle_name', 'last_name', 'last_initial'
                         , 'birth_date', 'linkedin_url',
         'linkedin_username', 'linkedin_id', 'facebook_url', 'facebook_username',
         'facebook_id', 'twitter_url', 'twitter_username', 'github_url',
@@ -34,32 +37,26 @@ def process_data(data):
         'regions', 'countries', 'street_addresses',
         'profiles', 'version_status'
                     ]
-
-    data.drop(useless_features, axis=1, inplace=True)
-
+    
+    data.drop(useless_features, inplace=True)
+    
     # engineer 'Name'
-    # URL = 'https://namecensus.com/top-first-names/top-first-names-since-1950.html'
-    # page = requests.get(URL)
-    # soup = BeautifulSoup(page.content, "html.parser")
-
-    # us_name_list = {}
-    # html_table = soup.find_all("td")[5:]
-    # for idx in range(len(html_table)):
-    #     if (idx) % 5 == 1:
-    #         us_name_list[html_table[idx].text.lower()] = html_table[idx+1].text
-
-    # data['us_name'] = 0
-    # for idx, name in enumerate(data['first_name']):
-    #     if name in us_name_list.keys():
-    #         data.at[idx, 'us_name'] = 1
+    us_names = pd.read_csv(my_path + '/us_names.csv')
+    us_names = us_names['name'].str.lower().to_list()
+    if data['first_name'] in us_names:
+        data['us_name'] = 1
+    else:
+        data['us_name'] = 0
             
-    # data.drop('first_name', axis=1, inplace=True) # drop 'name' column
+    data.drop('first_name', inplace=True) # drop 'name' column
 
     # gender string to integer
-    data.loc[(data['gender'] == 'male'), 'gender'] = 1
-    data.loc[(data['gender'] == 'female'), 'gender'] = -1
-    data.loc[(data['gender'] == 'None'), 'gender'] = 0
-    data.loc[(data['gender'] == None), 'gender'] = 0
+    if data['gender'] == 'male':
+        data['gender'] = 1
+    elif data['gender'] == 'female':
+        data['gender'] = -1
+    elif data['gender'] == 'None' or data['gender'] == None:
+        data['gender'] = 0
 
     # engineer 'Uni'
     uni_rank = pd.read_csv(my_path + '/uni_rank.csv', sep='\t')[['World Rank', 'Institution']].to_dict()['Institution']
@@ -80,113 +77,110 @@ def process_data(data):
     uni_rank['mit'] = uni_rank['massachusettsinstitutetechnology']
     uni_rank['caltec'] = uni_rank['californiainstitutetechnology']
 
-    person_uni_rank = np.zeros(len(data))
-    n = len(uni_rank)
-    for person in range(len(data)):
-        for school in data['education'][person]:
-            try:
-                if string_replace(school['school']['name']) in uni_rank:
-                    person_uni_rank[person] +=  n - uni_rank[string_replace(school['school']['name'])]
-            
-            except:
-                pass
     
-    data['uni_rank'] = person_uni_rank.astype(int)
+    n = len(uni_rank)
+    person_uni_rank = 0
+    for school in data['education']:
+        school_name = string_replace(school['school']['name'])
+        try:
+            if school_name in uni_rank:
+                person_uni_rank +=  n - uni_rank[school_name]        
+        except:
+            pass
+    
+    data['uni_rank'] = person_uni_rank
 
     # engineer 'degrees'
-    degree_score = np.zeros(len(data))
-    for person in range(len(data)):
-        for school in data['education'][person]:
+    degree_score = 0
+    for school in data['education']:
             if school['degrees']:
-                degree_score[person] += 1
+                degree_score += 1
     
     data['degree_score'] = degree_score
 
-    # one-hot
-    for person in range(len(data)):
-        for school in data['education'][person]:
-            #print(school['majors'])
-            for major in school['majors']:
-                maj = 'edu_' + major
-                if maj not in data:
-                    data[maj] = 0
-                data[maj][person] = 1
-    
-    data.drop('education', axis=1, inplace=True)
+    # one-hot 'major'
+    for school in data['education']:
+        for major in school['majors']:
+            maj = 'edu_' + major
+            if maj not in data:
+                data[maj] = 0
+            data[maj] = 1
+    data.drop('education', inplace=True)
 
     # drop 'birth year', 'job_title'
-    data.drop('birth_year', axis=1, inplace=True)
-    data.drop('job_title', axis=1, inplace=True)
+    data.drop('birth_year', inplace=True)
+    data.drop('job_title', inplace=True)
 
     # calculate month of service
-    mos = []
-    for d in np.array(data['job_start_date']):
-        try:
-            date = datetime.datetime.strptime(d, '%Y-%m')
-            mos.append(12 * (datetime.datetime.now().year - date.year) + (datetime.datetime.now().month - date.month))
-            
-        except:
-            mos.append(None)
+    try:
+        date = datetime.datetime.strptime(data['job_start_date'], '%Y-%m')
+        mos = 12 * (datetime.datetime.now().year - date.year) + (datetime.datetime.now().month - date.month)
+        
+    except:
+        mos = 40 # average mos
     
     data['month_of_service'] = mos
-    data.drop('job_start_date', axis=1, inplace=True)
+    data.drop('job_start_date', inplace=True)
 
     # job_title_levels (one-hot)
     unique_attributes = []
-    for elem_lst in data['job_title_levels']:
-        for elem in elem_lst:
-            string = 'level_' + elem
-            if string not in unique_attributes:
-                unique_attributes.append(string)
-                data['level_' + elem] = 0
+    for elem in data['job_title_levels']:
+        string = 'level_' + elem
+        if string not in unique_attributes:
+            data[string] = 1
 
-    for idx, elem_lst in enumerate(data['job_title_levels']):
-        for elem in elem_lst:
-            data['level_' + elem][idx] = 1
-
-    data.drop('job_title_levels', axis=1, inplace=True)
+    data.drop('job_title_levels', inplace=True)
 
     # number of skills
-    data['skills_count'] = None
-    for idx, skills in enumerate(data['skills']):
-        data['skills_count'][idx] = len(skills)
+    skill_cnt = len(data['skills'])
+    if skill_cnt > 0:
+        data['skills_count'] = skill_cnt
+    else: data['skills_count'] = 40 # average skill_cnt
 
-    data.drop('skills', axis=1, inplace=True)
-
-    # there are entries with 0 skills. I will assign the median skill_count to those people
-    median = np.median(data['skills_count'])
-    for idx, skill_cnt in enumerate(data['skills_count']):
-        if skill_cnt == 0:
-            data['skills_count'][idx] = int(median)
+    data.drop('skills', inplace=True)
+   
 
     # for experience just count the number of different companies.
     # add feature that indicates if person worked at a global 10001+ employee company
-    data['company_count'] = 0
     data['company_global'] = 0
-    for idx, elem_lst in enumerate(data['experience']):
-        data['company_count'][idx] = len(elem_lst)
-        for elem in elem_lst:
-            try:
-                if elem['company']['size'] == '10001+':
-                    data['company_global'][idx] = 1
-            except:
-                pass
+    data['company_count'] = len(data['experience'])
+        
+    try:
+        if data['company']['size'] == '10001+':
+            data['company_global'] = 1
+    except:
+        data['company_global'] = 0
 
-    data.drop('experience', axis=1, inplace=True)
+    data.drop('experience',  inplace=True)
+    
+    
+    
 
     # one-hot job_title_roles
-    data = data.join(pd.get_dummies(data['job_title_role'],prefix='role', prefix_sep='_'))
-    data = data.drop('job_title_role', axis=1)
+    try:
+        data['role_' + data['job_title_role']] = 1
+    except:
+        pass
+    data.drop('job_title_role',  inplace=True)
 
-    data = data.join(pd.get_dummies(data['job_title_sub_role'], prefix='sub_role', prefix_sep='_'))
-    data = data.drop('job_title_sub_role', axis=1)
+    try:
+        data['sub_role_' + data['job_title_sub_role']] = 1
+    except:
+        pass
+    data.drop('job_title_sub_role',  inplace=True)
 
-    # fill empty entries
-    # gender: NaN -> 0
-    data['gender'].fillna(0,inplace=True)
+    # cast into important feature to make full dataset
+    all_features = pd.read_csv(my_path + '/feat_importance.csv')['feature'].to_list()
+    final_data = pd.DataFrame()
+    for feat in all_features:
+        if feat in data:
+            final_data[feat] = [data[feat]]
+        else:
+            final_data[feat] = [0]
 
-    # months of service: NaN -> avergage
-    ave_mos = int(np.mean(data.month_of_service))
-    data['month_of_service'].fillna(ave_mos,inplace=True)
+    # scale data
+    std = np.load(model_path + '/std.npy')
+    mean = np.load(model_path + '/mean.npy')
+    final_data = (final_data.to_numpy() - mean) / std
 
-    return data
+    return final_data
