@@ -24,7 +24,7 @@ app = Flask(__name__)
 def home():
     if request.method == "GET":
        return render_template("index.html",
-                           value = 'david iyamah accountstory')
+                           value = -1 , company_and_name = ' ')
        
     if request.method == 'POST':
         company_and_name = request.form.get("name_employee_field")
