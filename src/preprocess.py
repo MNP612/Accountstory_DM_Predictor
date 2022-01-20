@@ -12,7 +12,6 @@ model_path = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..', 'mo
 
 def process_data(data):
     data = pd.Series(data)
-    
     useless_features = ['id', 'full_name', 'middle_initial', 'middle_name', 'last_name', 'last_initial'
                         , 'birth_date', 'linkedin_url',
         'linkedin_username', 'linkedin_id', 'facebook_url', 'facebook_username',
@@ -168,19 +167,18 @@ def process_data(data):
     except:
         pass
     data.drop('job_title_sub_role',  inplace=True)
-
     # cast into important feature to make full dataset
-    all_features = pd.read_csv(my_path + '/feat_importance.csv')['feature'].to_list()
+    all_features = np.load(model_path + '/used_features.npy', allow_pickle=True)
     final_data = pd.DataFrame()
     for feat in all_features:
         if feat in data:
             final_data[feat] = [data[feat]]
         else:
             final_data[feat] = [0]
-
     # scale data
     std = np.load(model_path + '/std.npy')
     mean = np.load(model_path + '/mean.npy')
-    final_data = (final_data.to_numpy() - mean) / std
 
+    final_data = ([np.array(final_data)[0]] - mean) / std
+    
     return final_data
